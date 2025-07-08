@@ -1,11 +1,11 @@
 import Navigation from '@/components/Navigation'
-import Hero from '@/components/Hero'
+import Contact from '@/components/Contact'
 
-export default function Home() {
+export default function ContactPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <Hero />
+      <Contact />
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">

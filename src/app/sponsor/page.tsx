@@ -1,11 +1,11 @@
 import Navigation from '@/components/Navigation'
-import Hero from '@/components/Hero'
+import Sponsor from '@/components/Sponsor'
 
-export default function Home() {
+export default function SponsorPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <Hero />
+      <Sponsor />
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">

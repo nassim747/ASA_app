@@ -1,11 +1,11 @@
 import Navigation from '@/components/Navigation'
-import Hero from '@/components/Hero'
+import About from '@/components/About'
 
-export default function Home() {
+export default function AboutPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <Hero />
+      <About />
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
