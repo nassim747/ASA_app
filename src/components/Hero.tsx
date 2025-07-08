@@ -1,15 +1,31 @@
 export default function Hero() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      {/* Main Hero Section */}
-      <section className="pt-24 pb-16">
-        <div className="container">
+      {/* Main Hero Section with Background */}
+      <section className="pt-24 pb-32 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/hero-background.jpg" 
+            alt="ASA McGill Background" 
+            className="w-full h-full object-cover"
+          />
+          {/* Light overlay for text readability */}
+          <div className="absolute inset-0 bg-white/70"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Logo and Title */}
             <div className="mb-8">
-              {/* Logo placeholder - you can replace this with an actual logo image */}
-              <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white font-bold text-2xl">ASA</span>
+              {/* ASA Logo */}
+              <div className="mb-6">
+                <img 
+                  src="/logo.png" 
+                  alt="ASA McGill Logo" 
+                  className="w-24 h-24 mx-auto object-contain"
+                />
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
@@ -46,7 +62,7 @@ export default function Hero() {
       </section>
 
       {/* Instagram Feed Section */}
-      <section className="pb-20">
+      <section className="pt-16 pb-20">
         <div className="container">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">

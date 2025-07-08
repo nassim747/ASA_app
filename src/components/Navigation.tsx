@@ -20,10 +20,12 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/">
-              <h1 className="text-2xl font-bold text-primary-600 cursor-pointer">
-                ASA McGill
-              </h1>
+            <Link href="/" className="flex items-center">
+              <img 
+                src="/logo.png" 
+                alt="ASA McGill" 
+                className="h-10 w-auto cursor-pointer"
+              />
             </Link>
           </div>
 
