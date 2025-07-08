@@ -1,292 +1,109 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
-import { Users, Calendar, Award, MapPin, ChevronDown, Instagram, Heart, MessageCircle } from 'lucide-react'
-
-interface FeedItem {
-  id: number
-  image: string
-  stat: {
-    number: string
-    label: string
-    description: string
-  }
-  caption: string
-  location: string
-  date: string
-  likes: number
-  comments: number
-}
-
-const feedData: FeedItem[] = [
-  {
-    id: 1,
-    image: "/api/placeholder/1200/800",
-    stat: {
-      number: "150+",
-      label: "Active Members",
-      description: "Strong community across all faculties"
-    },
-    caption: "Building bridges between Algerian students at McGill University. Our diverse community spans engineering, medicine, business, and arts.",
-    location: "McGill University Campus",
-    date: "2 days ago",
-    likes: 89,
-    comments: 23
-  },
-  {
-    id: 2,
-    image: "/api/placeholder/1200/800",
-    stat: {
-      number: "25+",
-      label: "Events This Year",
-      description: "Cultural celebrations to academic workshops"
-    },
-    caption: "From traditional Algerian dinners to professional networking sessions - we create experiences that celebrate our heritage while building our future.",
-    location: "Montreal, QC",
-    date: "5 days ago",
-    likes: 156,
-    comments: 41
-  },
-  {
-    id: 3,
-    image: "/api/placeholder/1200/800",
-    stat: {
-      number: "5",
-      label: "Years of Excellence",
-      description: "Established community since 2019"
-    },
-    caption: "Half a decade of promoting Algerian culture, academic excellence, and professional development. Our legacy continues to grow stronger.",
-    location: "ASA Events Hall",
-    date: "1 week ago",
-    likes: 203,
-    comments: 67
-  },
-  {
-    id: 4,
-    image: "/api/placeholder/1200/800",
-    stat: {
-      number: "12+",
-      label: "Strategic Partnerships",
-      description: "Collaborations across Montreal"
-    },
-    caption: "Partnering with student organizations, local businesses, and community leaders to expand opportunities for our members.",
-    location: "Downtown Montreal",
-    date: "2 weeks ago",
-    likes: 124,
-    comments: 35
-  },
-  {
-    id: 5,
-    image: "/api/placeholder/1200/800",
-    stat: {
-      number: "500+",
-      label: "Extended Network",
-      description: "Students, alumni, and supporters"
-    },
-    caption: "Our family extends beyond current students to include successful alumni, mentors, and community supporters who guide our journey.",
-    location: "Alumni Network Event",
-    date: "3 weeks ago",
-    likes: 287,
-    comments: 92
-  }
-]
-
 export default function Hero() {
-  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set())
-  const [activeItem, setActiveItem] = useState(0)
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = parseInt(entry.target.getAttribute('data-index') || '0')
-          if (entry.isIntersecting) {
-            setVisibleItems(prev => new Set(prev).add(index))
-            setActiveItem(index)
-          }
-        })
-      },
-      {
-        threshold: 0.6,
-        rootMargin: '-100px 0px'
-      }
-    )
-
-    itemRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div className="bg-black">
-      {/* Hero Header */}
-      <div className="min-h-screen relative overflow-hidden">
-        {/* Background Video/Image Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 z-10"></div>
-        
-        {/* Hero Content */}
-        <div className="relative z-20 min-h-screen flex items-center justify-center text-white">
-          <div className="container text-center">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-primary-200 to-primary-400 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* Main Hero Section */}
+      <section className="pt-24 pb-16">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Logo and Title */}
+            <div className="mb-8">
+              {/* Logo placeholder - you can replace this with an actual logo image */}
+              <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-white font-bold text-2xl">ASA</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
                 ASA McGill
               </h1>
-              <p className="text-xl md:text-3xl mb-4 text-gray-200">
-                Algerian Students Association
-              </p>
-              <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-gray-300">
-                Where culture meets excellence. Join Montreal's most vibrant Algerian student community.
-              </p>
               
-              {/* Interactive Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-                {[
-                  { icon: Users, number: "150+", label: "Members" },
-                  { icon: Calendar, number: "25+", label: "Events" },
-                  { icon: Award, number: "5", label: "Years" },
-                  { icon: MapPin, number: "12+", label: "Partners" }
-                ].map((item, index) => (
-                  <div key={index} className="group cursor-pointer">
-                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
-                      <item.icon className="w-8 h-8 text-primary-400 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-white mb-1">{item.number}</div>
-                      <div className="text-sm text-gray-300">{item.label}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <h2 className="text-xl md:text-2xl text-primary-600 font-semibold mb-6">
+                Algerian Students Association
+              </h2>
+            </div>
+
+            {/* Description */}
+            <div className="max-w-3xl mx-auto mb-12">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Welcome to the Algerian Students Association at McGill University. 
+                We are a vibrant community that connects Algerian students through 
+                cultural events, academic support, and networking opportunities. 
+                Our mission is to celebrate our heritage while building bridges 
+                for success in Montreal's academic landscape.
+              </p>
+            </div>
+
+            {/* Call to Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <button className="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
+                Join Our Community
+              </button>
+              <button className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
+                Learn More
+              </button>
             </div>
           </div>
         </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-          <ChevronDown className="h-8 w-8 text-white" />
-        </div>
-      </div>
+      </section>
 
-      {/* Full-Screen Feed */}
-      <div className="relative">
-        {feedData.map((item, index) => (
-          <div
-            key={item.id}
-            ref={(el) => { itemRefs.current[index] = el }}
-            data-index={index}
-            className="min-h-screen relative overflow-hidden"
-          >
-            {/* Full-screen background image */}
-            <div className="absolute inset-0">
-              <img
-                src={item.image}
-                alt={item.caption}
-                className={`w-full h-full object-cover transition-all duration-2000 ${
-                  visibleItems.has(index) ? 'scale-100' : 'scale-110'
-                }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+      {/* Instagram Feed Section */}
+      <section className="pb-20">
+        <div className="container">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                Follow Our Journey
+              </h3>
+              <p className="text-lg text-gray-600">
+                Stay connected with our latest events and community highlights on Instagram
+              </p>
             </div>
 
-            {/* Content overlay */}
-            <div className={`relative z-10 min-h-screen flex items-end pb-20 transition-all duration-1000 delay-300 ${
-              visibleItems.has(index) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-            }`}>
-              <div className="container">
-                <div className="max-w-4xl">
-                  {/* Instagram-style post layout */}
-                  <div className="bg-black/40 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
-                    {/* Post header */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">ASA</span>
-                        </div>
-                        <div>
-                          <div className="text-white font-semibold">ASA McGill</div>
-                          <div className="text-gray-300 text-sm">{item.location} • {item.date}</div>
-                        </div>
-                      </div>
-                      <Instagram className="w-6 h-6 text-white" />
-                    </div>
-
-                    {/* Main stat */}
-                    <div className="mb-6">
-                      <div className="text-6xl md:text-8xl font-bold text-transparent bg-gradient-to-r from-primary-400 to-white bg-clip-text mb-2">
-                        {item.stat.number}
-                      </div>
-                      <div className="text-2xl md:text-3xl font-bold text-white mb-2">
-                        {item.stat.label}
-                      </div>
-                      <div className="text-lg text-gray-300 mb-4">
-                        {item.stat.description}
-                      </div>
-                    </div>
-
-                    {/* Caption */}
-                    <p className="text-lg text-white leading-relaxed mb-6">
-                      {item.caption}
-                    </p>
-
-                    {/* Engagement */}
-                    <div className="flex items-center justify-between pt-6 border-t border-white/20">
-                      <div className="flex items-center space-x-6">
-                        <button className="flex items-center space-x-2 text-white hover:text-primary-400 transition-colors">
-                          <Heart className="w-5 h-5" />
-                          <span>{item.likes}</span>
-                        </button>
-                        <button className="flex items-center space-x-2 text-white hover:text-primary-400 transition-colors">
-                          <MessageCircle className="w-5 h-5" />
-                          <span>{item.comments}</span>
-                        </button>
-                      </div>
-                      <div className="text-gray-400 text-sm">
-                        {index + 1} / {feedData.length}
-                      </div>
-                    </div>
-                  </div>
+            {/* Instagram Feed Widget Container */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                </div>
+                
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                  Instagram Feed Coming Soon
+                </h4>
+                
+                <p className="text-gray-600 mb-6">
+                  This is where your Instagram feed widget will be embedded. 
+                  You can use services like SnapWidget, Elfsight, or Instagram Basic Display API.
+                </p>
+                
+                {/* Placeholder for Instagram widget */}
+                <div className="bg-gray-50 rounded-lg p-8 border-2 border-dashed border-gray-200">
+                  <p className="text-sm text-gray-500">
+                    📝 Instagram Feed Widget Placeholder
+                    <br />
+                    Replace this section with your chosen Instagram widget embed code
+                  </p>
+                </div>
+                
+                {/* Follow button */}
+                <div className="mt-6">
+                  <a 
+                    href="https://instagram.com/your_asa_account" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    Follow @asa_mcgill
+                  </a>
                 </div>
               </div>
             </div>
-
-            {/* Progress indicator */}
-            <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20">
-              <div className="flex flex-col space-y-2">
-                {feedData.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-1 h-8 rounded-full transition-all duration-300 ${
-                      i === activeItem ? 'bg-white' : 'bg-white/30'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Call to action */}
-      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-black to-primary-900 flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center opacity-20"></div>
-        <div className="relative z-10 container text-center text-white">
-          <h2 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white to-primary-300 bg-clip-text text-transparent">
-            Join the Movement
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Be part of Montreal's most dynamic Algerian student community. Connect, grow, and make your mark.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-gradient-to-r from-primary-500 to-primary-600 text-white font-bold px-12 py-4 rounded-full text-lg hover:scale-105 transition-transform duration-300 shadow-2xl">
-              Get Involved
-            </button>
-            <button className="border-2 border-white text-white font-bold px-12 py-4 rounded-full text-lg hover:bg-white hover:text-black transition-all duration-300">
-              Learn More
-            </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 } 
