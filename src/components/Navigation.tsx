@@ -10,6 +10,7 @@ export default function Navigation() {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
+    { name: 'Events', href: '/events' },
     { name: 'Contact', href: '/contact' },
     { name: 'Sponsor Us', href: '/sponsor' },
   ]

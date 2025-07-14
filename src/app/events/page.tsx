@@ -1,11 +1,11 @@
 import Navigation from '@/components/Navigation'
-import Contact from '@/components/Contact'
+import Events from '@/components/Events'
 
-export default function ContactPage() {
+export default function EventsPage() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <Contact />
+      <Events />
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
