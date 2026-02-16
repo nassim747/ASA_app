@@ -1,121 +1,186 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import DecorativeBorder from '@/components/DecorativeBorder'
+import { upcomingEvents } from '@/data/events'
+
 export default function Hero() {
+  const featuredEvent = upcomingEvents.find((e) => e.featured) ?? upcomingEvents[0]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      {/* Main Hero Section with Background */}
-      <section className="pt-24 pb-32 relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/hero-background.jpg" 
-            alt="ASA McGill Background" 
-            className="w-full h-full object-cover"
-          />
-          {/* Light overlay for text readability */}
-          <div className="absolute inset-0 bg-white/70"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="container relative z-10">
+    <div className="bg-heritage-cream">
+      {/* Main Hero Section */}
+      <section className="py-20 md:py-32">
+        <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Logo and Title */}
+            {/* Main Title */}
+            <h1 className="heading-heritage text-4xl md:text-5xl lg:text-6xl leading-tight mb-4">
+              Algerian Students&apos;<br />
+              <span className="emphasis">Association at McGill</span>
+            </h1>
+
+            {/* Location Label */}
+            <p className="subtitle-heritage mb-8">
+              McGill University — Montreal, Quebec
+            </p>
+
+            {/* Logo */}
             <div className="mb-8">
-              {/* ASA Logo */}
-              <div className="mb-6">
-                <img 
-                  src="/logo.png" 
-                  alt="ASA McGill Logo" 
-                  className="w-24 h-24 mx-auto object-contain"
-                />
+              <Image 
+                src="/logo.png" 
+                alt="ASA McGill Logo" 
+                width={144}
+                height={144}
+                className="w-28 h-28 md:w-36 md:h-36 mx-auto object-contain"
+                priority
+              />
+            </div>
+
+            {/* Decorative Divider */}
+            <div className="flex items-center justify-center gap-4 my-10">
+              <div className="h-px w-16 bg-heritage-red/40" />
+              <div className="flex items-center gap-1 text-heritage-red">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.4 0 2.7-.3 3.9-.8-3.1-1.8-5.2-5.2-5.2-9.2s2.1-7.4 5.2-9.2C14.7 2.3 13.4 2 12 2z"/>
+                </svg>
+                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10 6H16L11 10L13 16L8 12L3 16L5 10L0 6H6L8 0Z" />
+                </svg>
               </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
-                ASA McGill
-              </h1>
-              
-              <h2 className="text-xl md:text-2xl text-primary-600 font-semibold mb-6">
-                Algerian Students' Association at McGill
-              </h2>
+              <div className="h-px w-16 bg-heritage-red/40" />
             </div>
 
             {/* Description */}
-            <div className="max-w-3xl mx-auto mb-12">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                sbah el khir
-              </p>
-            </div>
+            <p className="font-sans text-lg text-heritage-black/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+              Connecting Algerian students at McGill University through cultural events, 
+              academic support, and community building. Celebrating our heritage while 
+              building bridges for the future.
+            </p>
 
-            {/* Call to Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <button className="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/join" className="btn-primary">
                 Join Our Community
-              </button>
-              <button className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
-                Learn More
-              </button>
+              </Link>
+              <Link href="/events" className="btn-outline">
+                Upcoming Events
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Instagram Feed Section */}
-      <section className="pt-16 pb-20">
+      {/* Visual Section with Community Photo */}
+      <section className="py-16 bg-heritage-cream-dark">
         <div className="container">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Follow Our Journey
-              </h3>
-              <p className="text-lg text-gray-600">
-                Stay connected with our latest events and community highlights on Instagram
-              </p>
-            </div>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Community Photo */}
+              <div className="relative">
+                <div className="relative aspect-square bg-heritage-cream border border-heritage-sand shadow-lg overflow-hidden">
+                  <Image 
+                    src="/events/homepage.JPG" 
+                    alt="ASA McGill Community" 
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {/* Decorative corners */}
+                <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 border-heritage-red" />
+                <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 border-heritage-red" />
+              </div>
 
-            {/* Instagram Feed Widget Container */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                  </svg>
-                </div>
-                
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                  Instagram Feed Coming Soon
-                </h4>
-                
-                <p className="text-gray-600 mb-6">
-                  This is where your Instagram feed widget will be embedded. 
-                  You can use services like SnapWidget, Elfsight, or Instagram Basic Display API.
+              {/* Text Content */}
+              <div>
+                <p className="subtitle-heritage mb-4">Our Mission</p>
+                <h2 className="heading-heritage text-3xl md:text-4xl mb-6">
+                  Preserving Culture,<br />
+                  <span className="emphasis">Building Community</span>
+                </h2>
+                <p className="font-sans text-heritage-black/70 leading-relaxed mb-6">
+                  The Algerian Students&apos; Association at McGill serves as a home away from home 
+                  for Algerian students and those interested in Algerian culture. We organize 
+                  cultural celebrations, academic talks, and social gatherings throughout the year.
                 </p>
-                
-                {/* Placeholder for Instagram widget */}
-                <div className="bg-gray-50 rounded-lg p-8 border-2 border-dashed border-gray-200">
-                  <p className="text-sm text-gray-500">
-                    📝 Instagram Feed Widget Placeholder
-                    <br />
-                    Replace this section with your chosen Instagram widget embed code
-                  </p>
-                </div>
-                
-                {/* Follow button */}
-                <div className="mt-6">
-                  <a 
-                    href="https://instagram.com/asa.mcgill" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
-                    Follow @asa.mcgill
-                  </a>
-                </div>
+                <Link href="/about" className="inline-flex items-center gap-2 font-sans font-semibold text-heritage-green hover:text-heritage-green-dark transition-colors">
+                  Learn more about us
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Upcoming Events Preview */}
+      {featuredEvent && (
+        <section className="py-20">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              {/* Section Header */}
+              <div className="text-center mb-12">
+                <p className="subtitle-heritage mb-4">Mark Your Calendar</p>
+                <h2 className="heading-heritage text-3xl md:text-4xl">
+                  Upcoming <span className="emphasis">Events</span>
+                </h2>
+              </div>
+
+              {/* Featured Event Card */}
+              <div className="card-heritage">
+                <div className="flex flex-col md:flex-row gap-8">
+                  {/* Date Box */}
+                  <div className="flex-shrink-0">
+                    <div className="w-24 h-24 bg-heritage-green text-heritage-white flex flex-col items-center justify-center">
+                      <span className="text-3xl font-serif font-bold">{featuredEvent.date.day}</span>
+                      <span className="text-sm uppercase tracking-wide">{featuredEvent.date.month}</span>
+                    </div>
+                  </div>
+
+                  {/* Event Details */}
+                  <div className="flex-1">
+                    <p className="subtitle-heritage text-heritage-red mb-2">Featured Event</p>
+                    <h3 className="font-serif text-2xl text-heritage-green mb-3">
+                      {featuredEvent.title}
+                    </h3>
+                    <p className="font-serif italic text-lg text-heritage-black/70 mb-4">
+                      {featuredEvent.subtitle}
+                    </p>
+                    <p className="font-sans text-heritage-black/60 mb-6">
+                      {featuredEvent.description}
+                    </p>
+                    {featuredEvent.ticketUrl && (
+                      <a 
+                        href={featuredEvent.ticketUrl}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-primary text-sm py-2 px-6 inline-block"
+                      >
+                        Buy Your Ticket
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* View All Events Link */}
+              <div className="text-center mt-10">
+                <Link href="/events" className="inline-flex items-center gap-2 font-sans font-semibold text-heritage-green hover:text-heritage-green-dark transition-colors">
+                  View all events
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Decorative Bottom Border */}
+      <DecorativeBorder />
     </div>
   )
-} 
+}

@@ -8,32 +8,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+        // Heritage palette matching visual identity
+        heritage: {
+          green: '#2D5A47',      // Sage/olive green (primary)
+          'green-dark': '#1E3D30',
+          'green-light': '#4A7A64',
+          red: '#8B2332',        // Deep muted red (accent)
+          'red-dark': '#6B1A26',
+          cream: '#F5F1E8',      // Warm cream background
+          'cream-dark': '#EBE5D8',
+          sand: '#D4C5A9',       // Sandy beige
+          black: '#1A1A1A',
+          white: '#FFFFFF',
         },
-        secondary: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-        },
+      },
+      fontFamily: {
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Source Sans 3', 'sans-serif'],
+      },
+      backgroundImage: {
+        'pattern-border': "url('/patterns/border.svg')",
       },
     },
   },
   plugins: [],
-} 
+}

@@ -2,44 +2,68 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'About', href: '/about' },
     { name: 'Events', href: '/events' },
+    { name: 'Join Us', href: '/join' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Sponsor Us', href: '/sponsor' },
   ]
 
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(href)
+  }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-heritage-cream/95 backdrop-blur-sm border-b border-heritage-sand">
       <div className="container">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <img 
+            <Link href="/" className="flex items-center gap-3 group">
+              <Image 
                 src="/logo.png" 
                 alt="ASA McGill" 
-                className="h-10 w-auto cursor-pointer"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
               />
+              <div className="hidden sm:block">
+                <span className="font-serif text-lg text-heritage-green font-semibold">
+                  ASA McGill
+                </span>
+              </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="flex items-center gap-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className={`font-sans text-sm font-medium px-4 py-2 transition-colors duration-200 relative ${
+                    isActive(item.href)
+                      ? 'text-heritage-green'
+                      : 'text-heritage-black/70 hover:text-heritage-green'
+                  }`}
                 >
                   {item.name}
+                  {isActive(item.href) && (
+                    <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-heritage-red" />
+                  )}
                 </Link>
               ))}
             </div>
@@ -49,12 +73,13 @@ export default function Navigation() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="w-10 h-10 flex items-center justify-center text-heritage-green hover:bg-heritage-cream-dark rounded transition-colors"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? (
-                <X className="block h-6 w-6" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="block h-6 w-6" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -62,13 +87,17 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+          <div className="md:hidden border-t border-heritage-sand bg-heritage-cream">
+            <div className="py-4 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                  className={`font-sans text-base block px-4 py-3 transition-colors border-l-4 ${
+                    isActive(item.href)
+                      ? 'text-heritage-green bg-heritage-cream-dark border-heritage-red'
+                      : 'text-heritage-black/70 hover:bg-heritage-cream-dark hover:text-heritage-green border-transparent'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -80,4 +109,4 @@ export default function Navigation() {
       </div>
     </nav>
   )
-} 
+}
