@@ -135,28 +135,6 @@ export default function Events() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-heritage-green text-heritage-white">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-3xl md:text-4xl mb-4">
-              Don&apos;t Miss <span className="italic">Out</span>
-            </h2>
-            <p className="font-sans text-heritage-white/80 mb-8">
-              Follow us on social media and subscribe to our newsletter to stay updated on all upcoming events.
-            </p>
-            <a 
-              href="https://instagram.com/asa.mcgill" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-heritage-white text-heritage-green font-sans font-semibold py-3 px-8 hover:bg-heritage-cream transition-colors"
-            >
-              Follow @asa.mcgill
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Decorative Bottom Border */}
       <DecorativeBorder />
     </div>
